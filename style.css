@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Jura&family=Neucha&display=swap");
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: "Jura", sans-serif;
+}
+
+:root {
+  --cell-size: 5vh;
+  --piece-size: 4vh;
+}
+
+body {
+  margin: 0;
+  background-color: rgba(243, 217, 183, 0.885);
+}
+
+.on {
+  width: 100vw;
+  height: 5vh;
+  padding-top: 2vh;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2vh;
+}
+
+.board {
+  width: 100vw;
+  height: 85vh;
+  margin-bottom: 3vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(15, auto);
+}
+
+.operation {
+  width: 100vw;
+  height: 5vh;
+  display: grid;
+  justify-items: center;
+}
+
+#clearButton {
+  align-items: center;
+  width: 3vw;
+  height: 2vh;
+  font-weight: bold;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 2px solid black;
+  border-radius: 1vh;
+  margin: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.cell.white,
+.cell.black {
+  cursor: not-allowed;
+}
+
+.cell.white::before,
+.cell.cell.white::after {
+  background-color: white;
+}
+
+.cell.black::before {
+  background-color: black;
+}
+
+.board.white .cell:not(.white):not(.black):hover::before {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.board.black .cell:not(.white):not(.black):hover::before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cell.white::before,
+.cell.white::after,
+.board.white .cell:not(.white):not(.black):hover::before,
+.board.white .cell:not(.white):not(.black):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 70%;
+}
+
+.cell.white::before,
+.board.white .cell:not(.white):not(.black):hover::before {
+  width: var(--piece-size);
+  height: var(--piece-size);
+}
+
+.cell.black::before,
+.cell.black::after,
+.board.black .cell:not(.white):not(.black):hover::before,
+.board.black .cell:not(.white):not(.black):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 60%;
+}
+
+.cell.black::before,
+.board.black .cell:not(.white):not(.black):hover::before {
+  width: var(--piece-size);
+  height: var(--piece-size);
+}
+
+.winning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 3rem;
+  flex-direction: column;
+}
+
+.winning-message button {
+  font-size: 2rem;
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.winning-message button:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+.winning-message.show {
+  display: flex;
+}
